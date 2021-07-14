@@ -1,0 +1,2 @@
+cargo:rustc-env=TYPENUM_BUILD_CONSTS=/home/zaza/combine-lab/CODE/rust/poly-radar/target/debug/build/typenum-66964a7887ae2d1b/out/consts.rs
+cargo:rustc-env=TYPENUM_BUILD_OP=/home/zaza/combine-lab/CODE/rust/poly-radar/target/debug/build/typenum-66964a7887ae2d1b/out/op.rs

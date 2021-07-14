@@ -4,19 +4,21 @@ use std::fs::File;
 use std::io::Write;
 
 fn main() {
+    let fasta_file_path = std::env::args().nth(1).expect("no pattern given");
+let out_file_path = std::env::args().nth(2).expect("no path given");
     // read in file
     let fasta_file = std::path::Path::new(
-        "/Volumes/T7/combine/project/afvelo/readAnnotation/DATA/su_separated/gencode.vM25.annotation.expanded.unspliced.fa",
+        &fasta_file_path
     );
     let mut out_file = File::create(
-        "/Volumes/T7/combine/project/afvelo/readAnnotation/DATA/su_separated/polyA2t.tsv",
+        &out_file_path
     )
     .unwrap();
     let reader = fasta::Reader::from_file(fasta_file).unwrap();
 
     // set up probes
-    let mut poly_a = Myers::<u64>::new(vec![65u8; 31]);
-    let mut poly_t = Myers::<u64>::new(vec![84u8; 31]);
+    let mut poly_a = Myers::<u64>::new(vec![65u8; 11]);
+    let mut poly_t = Myers::<u64>::new(vec![84u8; 11]);
 
     // iterate over records
     for result in reader.records() {
@@ -54,17 +56,18 @@ fn main() {
         }
         // println!("{:?}", type_of(poly_t_occ.first()));
         // writeln!(out_file, "{}\t{}\t{}", record.id(), poly_a_occ.len(), poly_a_occ.join("\t"))
-        writeln!(
-            &mut out_file,
-            "{}\t{}\t{}",
-            record.id(),
-            poly_occ.len(),
-            poly_occ
-                .into_iter()
-                .map(|a| a.to_string())
-                .collect::<Vec<String>>()
-                .join("\t")
-        )
+        writeln!(out_file, "{}\t{}", record.id(), poly_a_occ.len())
+        // writeln!(
+        //     &mut out_file,
+        //     "{}\t{}\t{}",
+        //     record.id(),
+        //     poly_occ.len(),
+        //     poly_occ
+        //         .into_iter()
+        //         .map(|a| a.to_string())
+        //         .collect::<Vec<String>>()
+        //         .join("\t")
+        // )
         .unwrap();
     }
 }
