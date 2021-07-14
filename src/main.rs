@@ -38,6 +38,7 @@ let out_file_path = std::env::args().nth(2).expect("no path given");
         poly_occ.dedup();
         // if no hit, next record
         if poly_occ.is_empty() {
+            writeln!(out_file, "{}\t{}", record.id(), 0).unwrap();
             continue;
         }
 
@@ -47,7 +48,7 @@ let out_file_path = std::env::args().nth(2).expect("no path given");
             // a long polyA will produce many hits, so remove continuous hits
             let mut keep = vec![true; poly_occ.len()];
             for idx in 1..poly_occ.len() {
-                if poly_occ[idx] <= (poly_occ[idx - 1] + 31) {
+                if poly_occ[idx] <= (poly_occ[idx - 1] + 11) {
                     keep[idx] = false;
                 }
             }
