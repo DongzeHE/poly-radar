@@ -55,8 +55,8 @@ let out_file_path = std::env::args().nth(2).expect("no path given");
             poly_occ.retain(|_| (keep[i], i += 1).0);
         }
         // println!("{:?}", type_of(poly_t_occ.first()));
-        // writeln!(out_file, "{}\t{}\t{}", record.id(), poly_a_occ.len(), poly_a_occ.join("\t"))
-        writeln!(out_file, "{}\t{}", record.id(), poly_a_occ.len())
+        // writeln!(out_file, "{}\t{}\t{}", record.id(), poly_occ.len(), poly_a_occ.join("\t"))
+        writeln!(out_file, "{}\t{}", record.id(), poly_occ.len())
         // writeln!(
         //     &mut out_file,
         //     "{}\t{}\t{}",
